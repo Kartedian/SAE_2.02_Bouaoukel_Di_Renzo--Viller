@@ -8,4 +8,8 @@ public class Arc {
         this.dest = dest;
         this.cout = cout;
     }
+
+    public String toString(){
+        return this.dest+" ("+this.cout+")";
+    }
 }
