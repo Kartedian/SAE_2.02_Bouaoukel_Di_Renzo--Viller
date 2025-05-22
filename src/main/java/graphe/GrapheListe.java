@@ -17,7 +17,8 @@ public class GrapheListe {
         if(destination == null && destination.isEmpty() || depart == null && depart.isEmpty() || cout<=0.0) {
             return;
         }
-        this.noeuds.add(destination);
+        if(!this.noeuds.contains(destination))
+            this.noeuds.add(destination);
         this.adjacence.get(getIndice(depart)).ajouterArc(new Arc(destination, cout));
     }
 }
