@@ -10,6 +10,6 @@ public class Arc {
     }
 
     public String toString(){
-        return this.dest+" ("+this.cout+")";
+        return this.dest+"("+this.cout+")";
     }
 }
