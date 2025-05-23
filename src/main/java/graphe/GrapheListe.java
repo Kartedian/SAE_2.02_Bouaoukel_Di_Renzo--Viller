@@ -1,13 +1,14 @@
 package graphe;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Implementation d'un graphe orienté et pondéré utilisant des listes d'adjacence.
  * Le graphe est représenté par une liste de noeuds et une liste d'adjacence
  * contenant les arcs sortants de chaque noeud.
  */
-public class GrapheListe {
+public class GrapheListe implements Graphe{
     /** Liste des noms des noeuds du graphe */
     private ArrayList<String> noeuds;
 
@@ -20,6 +21,14 @@ public class GrapheListe {
     public GrapheListe(){
         this.noeuds = new ArrayList<String>();
         this.adjacence = new ArrayList<Arcs>();
+    }
+
+    public List<String> listeNoeuds(){
+        return new ArrayList<>(this.noeuds);
+    }
+
+    public List<Arc> suivants(String n){
+        return this.adjacence.get(this.getIndice(n)).getArcs();
     }
 
     /**
