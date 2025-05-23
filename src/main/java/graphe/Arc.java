@@ -12,4 +12,13 @@ public class Arc {
     public String toString(){
         return this.dest+"("+this.cout+")";
     }
+
+    public double getCout() {
+        return cout;
+    }
+
+    public String getDest(){
+
+        return dest;
+    }
 }
