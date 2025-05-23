@@ -25,8 +25,10 @@ public class Test_unitaires {
         x.ajouterArc("B", "C", 10);
         x.ajouterArc("C", "A", 10);
 
-        assertEquals("A -> B(10.0) C(10.0) \nB -> C(10.0) A(10.0) \nC -> A(10.0) B(10.0) \n", x.toString());
-        //assertFalse(x.listeNoeuds().contains("D"));
+        assertEquals("A -> B(10.0) \nB -> C(10.0) \nC -> A(10.0) \n", x.toString());
+        assertEquals(1, x.getIndice("B"));
+        assertEquals(2, x.getIndice("C"));
+        assertEquals(0, x.getIndice("A"));
     }
 
 }
