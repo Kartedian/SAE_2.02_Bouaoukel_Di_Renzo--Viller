@@ -23,7 +23,7 @@ public class Arc {
         else
             return;
 
-        if (dest == null && dest.isEmpty())
+        if (dest != null && !dest.isEmpty())
             this.dest = dest;
         else {
             this.cout=0.0;
