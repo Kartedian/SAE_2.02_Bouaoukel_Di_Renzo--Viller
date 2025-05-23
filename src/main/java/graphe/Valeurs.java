@@ -73,7 +73,9 @@ public class Valeurs {
      * @return la valeur stockee
      */
     public double getValeur(String nom) {
-        return this.valeur.get(nom);
+        if(this.valeur.containsKey(nom))
+            return this.valeur.get(nom);
+        return -1.0;
     }
 
     /**

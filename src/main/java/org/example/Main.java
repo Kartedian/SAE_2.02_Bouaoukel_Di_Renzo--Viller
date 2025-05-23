@@ -14,5 +14,8 @@ public class Main {
         gra.ajouterArc("E", "D", 87);
 
         System.out.println(gra.toString());
+
+        Valeurs test = Bellman.resoudre(gra, "D");
+        System.out.println(test.toString());
     }
 }
