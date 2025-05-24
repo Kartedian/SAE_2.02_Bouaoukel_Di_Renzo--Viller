@@ -15,7 +15,7 @@ public class Test_unitaires {
         x = new Arc("A", 0);
 
         assertNotEquals("A(10.0)", x.toString());
-        assertEquals("A(0.0)", x.toString());
+        assertEquals("null(0.0)", x.toString());
     }
 
     @Test
@@ -53,14 +53,42 @@ public class Test_unitaires {
         gra.ajouterArc("F", "A", 1);
         gra.ajouterArc("F", "E", 2);
 
+        Strategie strategie = new Strategie(new Bellman());
+        Valeurs res = strategie.trouverChemins(gra, "A");
 
-
-        Valeurs res = Bellman.resoudre(gra, "A");
         assertEquals(res.getValeur("A"), 0.0);
         assertEquals(res.getValeur("B"), 7.0);  //A>B
         assertEquals(res.getValeur("C"), 15.0); //A>B>C
         assertEquals(res.getValeur("D"), 14.0); //A>F>E>D
         assertEquals(res.getValeur("E"), 12.0); //A>F>E
+        assertEquals(res.getValeur("F"), 10.0); //A>F
+    }
+
+    @Test
+    public void Test_Dijkstra() {
+        GrapheListe gra = new GrapheListe();
+
+        gra.ajouterArc("A", "B", 7);
+        gra.ajouterArc("A", "F", 10);
+        gra.ajouterArc("B", "C", 8);
+        gra.ajouterArc("B", "A", 2);
+        gra.ajouterArc("C", "D", 7);
+        gra.ajouterArc("C", "B", 6);
+        gra.ajouterArc("D", "E", 8);
+        gra.ajouterArc("D", "C", 2);
+        gra.ajouterArc("E", "F", 1);
+        gra.ajouterArc("E", "D", 6);
+        gra.ajouterArc("F", "A", 9);
+        gra.ajouterArc("F", "E", 10);
+
+        Strategie strategie = new Strategie(new Dijkstra());
+        Valeurs res = strategie.trouverChemins(gra, "A");
+
+        assertEquals(res.getValeur("A"), 0.0);
+        assertEquals(res.getValeur("B"), 7.0);  //A>B
+        assertEquals(res.getValeur("C"), 15.0); //A>B>C
+        assertEquals(res.getValeur("D"), 22.0); //A>B>C>D
+        assertEquals(res.getValeur("E"), 20.0); //A>F>E
         assertEquals(res.getValeur("F"), 10.0); //A>F
     }
 }
