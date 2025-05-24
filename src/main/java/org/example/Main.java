@@ -17,5 +17,9 @@ public class Main {
 
         Valeurs test = Bellman.resoudre(gra, "D");
         System.out.println(test.toString());
+        System.out.println(test.calculerChemin("E"));
+
+        Valeurs test_2 = Dijkstra.resoudre(gra, "D");
+        System.out.println(test_2.toString());
     }
 }
