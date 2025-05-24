@@ -99,6 +99,22 @@ public class Valeurs {
 
     }
 
-
+    /**
+     * Cette méthode retourne une liste de nœuds correspondant au chemin menant au nœud
+     * passé en paramètre depuis le point de départ donné lors de la construction de l’objet Valeurs.
+     *
+     * @param destination le nom du noeud de destination
+     * @return une liste de String qui contient le chemin
+     */
+    public List<String> calculerChemin(String destination){
+        List<String> chemin = new java.util.ArrayList<>();
+        String parent = this.getParent(destination);
+        chemin.add(destination);
+        while(parent != null && !parent.isEmpty()) {
+            chemin.add(parent);
+            parent = this.getParent(parent);
+        }
+        return chemin;
+    }
 
 }
