@@ -57,9 +57,16 @@ public class GrapheListe implements Graphe{
         return new ArrayList<>(this.noeuds);
     }
 
-    public List<Arc> suivants(String n){
-        return this.adjacence.get(this.getIndice(n)).getArcs();
+    public List<Arc> suivants(String n) {
+        // Renvoie la liste des arcs sortants du noeud n
+        List<Arc> res = new ArrayList<>();
+        if (this.noeuds.contains(n)) {
+            int index = getIndice(n);
+            return new ArrayList<>(this.adjacence.get(index).getArcs());
+        }
+        return null;
     }
+
 
     /**
      * Recherche l'indice d'un noeud dans la liste des noeuds
