@@ -15,11 +15,17 @@ public class Main {
 
         System.out.println(gra.toString());
 
-        Valeurs test = Bellman.resoudre(gra, "D");
+        Strategie strategie = new Strategie(new Bellman());
+        Valeurs test = strategie.trouverChemins(gra, "D");
         System.out.println(test.toString());
-        System.out.println(test.calculerChemin("E"));
+        System.out.println(test.calculerChemin("E")+"\n");
 
-        Valeurs test_2 = Dijkstra.resoudre(gra, "D");
+        strategie.setAlgorithme(new Dijkstra());
+        Valeurs test_2 = strategie.trouverChemins(gra, "D");
         System.out.println(test_2.toString());
+        System.out.println(test_2.calculerChemin("E")+"\n");
+
+        GrapheListe gra_file = new GrapheListe("./src/main/resources/test.txt");
+        System.out.println(gra_file.toString());
     }
 }
