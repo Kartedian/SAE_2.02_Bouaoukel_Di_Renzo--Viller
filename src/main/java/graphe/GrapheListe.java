@@ -1,5 +1,8 @@
 package graphe;
 
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -23,13 +26,47 @@ public class GrapheListe implements Graphe{
         this.adjacence = new ArrayList<Arcs>();
     }
 
+    /**
+     * un constructeur prenant en paramètre le nom du fichier contenant le descriptif (sous forme de liste d’arcs)
+     * du graphe et construisant l’objet graphe correspondant
+     *
+     * @param file
+     */
+    public GrapheListe(String file){
+        this.noeuds = new ArrayList<String>();
+        this.adjacence = new ArrayList<Arcs>();
+
+        try{
+            FileReader reader = new FileReader(file);
+            BufferedReader buff = new BufferedReader(reader);
+
+            String line;
+            while((line = buff.readLine()) != null){
+                String[] parts = line.split(" ");
+                if(parts.length == 3){
+                    ajouterArc(parts[0], parts[1], Double.parseDouble(parts[2]));
+                }
+            }
+        } catch (IOException e) {
+            System.out.println("Error reading file: " + e.getMessage());
+        }
+
+    }
+
     public List<String> listeNoeuds(){
         return new ArrayList<>(this.noeuds);
     }
 
-    public List<Arc> suivants(String n){
-        return this.adjacence.get(this.getIndice(n)).getArcs();
+    public List<Arc> suivants(String n) {
+        // Renvoie la liste des arcs sortants du noeud n
+        List<Arc> res = new ArrayList<>();
+        if (this.noeuds.contains(n)) {
+            int index = getIndice(n);
+            return new ArrayList<>(this.adjacence.get(index).getArcs());
+        }
+        return null;
     }
+
 
     /**
      * Recherche l'indice d'un noeud dans la liste des noeuds

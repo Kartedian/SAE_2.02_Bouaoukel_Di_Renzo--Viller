@@ -8,7 +8,7 @@ import java.util.Map;
  * Classe pour résoudre le plus court chemin dans un graphe
  * avec l'algorithme de Bellman-Ford.
  */
-public class Bellman {
+public class Bellman implements Algorithme{
 
     /**
      * Résout le plus court chemin depuis un nœud de départ dans le graphe donné
@@ -19,7 +19,7 @@ public class Bellman {
      * @return un objet Valeurs contenant les distances minimales et les prédécesseurs
      * @throws IllegalArgumentException si il n'y a pas de nœud de départ dans le graphe
      */
-    public static Valeurs resoudre(Graphe g, String depart) {
+    public Valeurs resoudre(Graphe g, String depart) {
         List<String> noeuds = g.listeNoeuds();
         if (!noeuds.contains(depart)) {
             throw new IllegalArgumentException("Le nœud de départ n'existe pas dans le graphe.");
@@ -34,7 +34,7 @@ public class Bellman {
             } else {
                 valeurs.setValeur(n, Double.MAX_VALUE);
             }
-            valeurs.setParent(n, null);
+            valeurs.setParent(n, "");
         }
 
         int taille = noeuds.size();
