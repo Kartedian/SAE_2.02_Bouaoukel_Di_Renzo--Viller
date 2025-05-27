@@ -50,7 +50,6 @@ public class GrapheListe implements Graphe{
         } catch (IOException e) {
             System.out.println("Error reading file: " + e.getMessage());
         }
-
     }
 
     public List<String> listeNoeuds(){
@@ -120,5 +119,18 @@ public class GrapheListe implements Graphe{
             res += "\n";
         }
         return res;
+    }
+
+    public void ajouterArc(String depart, String destination, double cout, String ligneMetro) {
+        // Vérifie les paramètres
+        if (destination == null && destination.isEmpty() || depart == null && depart.isEmpty() || cout <= 0.0 || ligneMetro == null && ligneMetro.isEmpty()) {
+            return;
+        }
+        // Ajoute les noeuds si nécessaire
+        if (!this.noeuds.contains(depart)) {
+            this.noeuds.add(depart);
+            this.adjacence.add(new Arcs());
+        }
+        this.adjacence.get(this.getIndice(depart)).ajouterArc(new Arc(destination, cout, ligneMetro));
     }
 }
