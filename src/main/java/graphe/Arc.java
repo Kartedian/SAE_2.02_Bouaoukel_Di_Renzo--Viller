@@ -10,6 +10,7 @@ package graphe;
 public class Arc {
     private String dest;
     private double cout;
+    private String ligne;
 
     /**
      * Construit un nouvel arc
@@ -48,5 +49,27 @@ public class Arc {
     public String getDest(){
 
         return dest;
+    }
+
+    public Arc(String dest, double cout, String ligne) {
+        if (cout > 0.0)
+            this.cout = cout;
+        else
+            return;
+
+        if (dest != null && !dest.isEmpty())
+            this.dest = dest;
+        else {
+            this.cout=0.0;
+            return;
+        }
+
+        if(ligne != null && !ligne.isEmpty())
+            this.ligne = ligne;
+        else {
+            this.dest = null;
+            this.cout = 0.0;
+            return;
+        }
     }
 }
