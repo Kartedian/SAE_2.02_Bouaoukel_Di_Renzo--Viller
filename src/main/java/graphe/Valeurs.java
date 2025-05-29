@@ -120,21 +120,22 @@ public class Valeurs {
     }
 
     /**
-     * Affiche dans la console les étapes d'un chemin
-     * Chaque élément de la liste est affiché avec son index sous la forme : "étape X : sommet".
+     * Affiche dans la console les étapes d'un chemin dans le sens inverse,
+     * depuis le dernier sommet jusqu'au premier.
      *
      * @param chemin La liste des noms des sommets représentant un chemin.
-     * @return null (aucune valeur utile retournée ; cette méthode est prévue pour afficher).
+     * @return null (la méthode est uniquement utilisée pour l'affichage).
      */
     public static Object ToStringChemin(List<String> chemin) {
         String liste = "";
+        int e = 1;
 
-        for (int i = 0; i < chemin.size(); i++) {
-            liste += "étape " + i + " : " + chemin.get(i) + "\n";
+        for (int i = chemin.size() - 1; i >= 0; i--) {
+            liste += "étape " + e + " : " + chemin.get(i) + "\n";
+            e++;
         }
 
         System.out.println(liste);
-
         return null;
     }
 

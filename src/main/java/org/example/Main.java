@@ -20,11 +20,11 @@ public class Main {
         System.out.println(gra.toString());
 
         Strategie strategie = new Strategie(new Bellman());
-        Valeurs test = strategie.trouverChemins(gra, "E");
+        Valeurs test = strategie.trouverChemins(gra, "C");
         System.out.println(test.toString());
 
 
-        Valeurs.ToStringChemin(test.calculerChemin("C"));
+        Valeurs.ToStringChemin(test.calculerChemin("E"));
 
 
 
