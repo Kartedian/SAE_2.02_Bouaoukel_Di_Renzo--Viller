@@ -1,5 +1,7 @@
 package graphe;
 
+import jdk.dynalink.beans.StaticClass;
+
 import java.lang.reflect.Array;
 import java.util.Map;
 import java.util.TreeMap;
@@ -116,5 +118,26 @@ public class Valeurs {
         }
         return chemin;
     }
+
+    /**
+     * Affiche dans la console les étapes d'un chemin
+     * Chaque élément de la liste est affiché avec son index sous la forme : "étape X : sommet".
+     *
+     * @param chemin La liste des noms des sommets représentant un chemin.
+     * @return null (aucune valeur utile retournée ; cette méthode est prévue pour afficher).
+     */
+    public static Object ToStringChemin(List<String> chemin) {
+        String liste = "";
+
+        for (int i = 0; i < chemin.size(); i++) {
+            liste += "étape " + i + " : " + chemin.get(i) + "\n";
+        }
+
+        System.out.println(liste);
+
+        return null;
+    }
+
+
 
 }

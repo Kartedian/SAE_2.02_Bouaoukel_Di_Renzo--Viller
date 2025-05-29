@@ -25,6 +25,9 @@ public class Bellman implements Algorithme{
             throw new IllegalArgumentException("Le nœud de départ n'existe pas dans le graphe.");
         }
 
+
+
+
         Valeurs valeurs = new Valeurs();
 
         // Initialisation : distance 0 pour depart, Max_Value pour les autres
