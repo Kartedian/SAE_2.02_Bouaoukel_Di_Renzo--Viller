@@ -23,12 +23,16 @@ public class Main {
         Valeurs test = strategie.trouverChemins(gra, "E");
         System.out.println(test.toString());
 
+
         Valeurs.ToStringChemin(test.calculerChemin("C"));
 
+
+
+
         strategie.setAlgorithme(new Dijkstra());
-        Valeurs test_2 = strategie.trouverChemins(gra, "D");
+        Valeurs test_2 = strategie.trouverChemins(gra, "E");
         System.out.println(test_2.toString());
-        System.out.println(test_2.calculerChemin("E")+"\n");
+        System.out.println(test_2.calculerChemin("C")+"\n");
 
         GrapheListe gra_file = new GrapheListe("./src/main/resources/test.txt");
         System.out.println(gra_file.toString());
