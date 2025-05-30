@@ -1,7 +1,9 @@
 package graphe;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Classe pour résoudre le plus court chemin dans un graphe
@@ -82,5 +84,55 @@ public class Dijkstra implements Algorithme {
 
         return minNodo;
     }
+
+    /**
+     * Version 2 de Dijkstra qui ajoute une pénalité de 10 lors d'un changement de ligne.
+     */
+    public Valeurs resoudre2(Graphe g, String depart){
+        Valeurs valeurs = new Valeurs();
+        List<String> Q = new ArrayList<>();
+        if (!g.listeNoeuds().contains(depart)) {
+            throw new IllegalArgumentException("Le nœud de départ n'existe pas dans le graphe.");
+        }
+
+        // Pour chaque station, on garde aussi la dernière ligne utilisée pour y arriver
+        Map<String, String> ligneParente = new HashMap<>();
+
+        for (String v : g.listeNoeuds()) {
+            valeurs.setValeur(v, Double.POSITIVE_INFINITY);
+            valeurs.setParent(v, "");
+            Q.add(v);
+        }
+
+        valeurs.setValeur(depart, 0.0);
+        ligneParente.put(depart, null); // Pas de ligne pour le départ
+
+        while (!Q.isEmpty()) {
+            String u = trouveMin(Q, valeurs);
+            Q.remove(u);
+
+            List<Arc> arcs = g.suivants(u);
+            for (Arc arc : arcs) {
+                String v = arc.getDest();
+                if (!Q.contains(v)) continue;
+
+                String ligneU = ligneParente.get(u);
+                String ligneArc = arc.getDest();
+
+                double penalite = (ligneU != null && !ligneU.equals(ligneArc)) ? 10.0 : 0.0;
+                double nouveauCout = valeurs.getValeur(u) + arc.getCout() + penalite;
+
+                if (nouveauCout < valeurs.getValeur(v)) {
+                    valeurs.setValeur(v, nouveauCout);
+                    valeurs.setParent(v, u);
+                    ligneParente.put(v, ligneArc);
+                }
+            }
+        }
+
+        return valeurs;
+    }
+
+
 
 }

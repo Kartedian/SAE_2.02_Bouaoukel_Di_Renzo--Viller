@@ -36,6 +36,31 @@ public class Test_unitaires {
         assertEquals(3, x.listeNoeuds().size());
     }
 
+
+    /**
+     * Test unitaire de l'algorithme de Bellman-Ford appliqué à un graphe orienté
+     *
+     * Le graphe est construit avec des arcs entre les sommets A, B, C, D, E et F.
+     * Le test vérifie que l'algorithme Bellman-Ford, appliqué à partir du sommet "A",
+     * renvoie les distances minimales correctes vers chaque autre sommet.
+     *
+     * Arcs du graphe :
+     * - A → B (7), A → F (10)
+     * - B → C (8), B → A (2)
+     * - C → D (7), C → B (4)
+     * - D → E (4), D → C (2)
+     * - E → F (4), E → D (2)
+     * - F → A (1), F → E (2)
+     *
+     * Chemins minimaux attendus depuis A :
+     * - A → B : 7
+     * - A → B → C : 15
+     * - A → F : 10
+     * - A → F → E : 12
+     * - A → F → E → D : 14
+     *
+     * Les assertions vérifient que ces distances sont correctement trouvées par l'algorithme.
+     */
     @Test
     public void Test_Bellman() {
         GrapheListe gra = new GrapheListe();

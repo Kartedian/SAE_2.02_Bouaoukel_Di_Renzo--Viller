@@ -72,4 +72,6 @@ public class Arc {
             return;
         }
     }
+
+    public String getLigne() {return this.ligne;}
 }

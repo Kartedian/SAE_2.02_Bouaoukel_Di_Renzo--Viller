@@ -38,4 +38,16 @@ public class Strategie{
     public Valeurs trouverChemins(Graphe g, String depart) {
         return algorithme.resoudre(g, depart);
     }
+
+    /**
+     * Trouve les plus courts chemins dans le graphe à partir d'un nœud de départ
+     * en utilisant l'algorithme sélectionné avec le système de pénalité.
+     *
+     * @param g le graphe sur lequel effectuer la recherche
+     * @param depart le nœud de départ
+     * @return un objet Valeurs contenant les résultats de la recherche
+     */
+    public Valeurs trouverChemins2(Graphe g, String depart) {
+        return algorithme.resoudre2(g, depart);
+    }
 }

@@ -1,9 +1,9 @@
 package graphe;
 
+
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
 /**
  * Classe pour résoudre le plus court chemin dans un graphe
  * avec l'algorithme de Bellman-Ford.
@@ -69,6 +69,61 @@ public class Bellman implements Algorithme{
         }
 
 
+
+        return valeurs;
+    }
+
+
+    public Valeurs resoudre2(Graphe g, String depart) {
+        List<String> noeuds = g.listeNoeuds();
+        if (!noeuds.contains(depart)) {
+            throw new IllegalArgumentException("Le nœud de départ n'existe pas dans le graphe.");
+        }
+
+        Valeurs valeurs = new Valeurs();
+        Map<String, String> ligneParNoeud = new HashMap<>(); // Pour garder la ligne empruntée pour chaque station
+
+        for (String n : noeuds) {
+            if (n.equals(depart)) {
+                valeurs.setValeur(n, 0.0);
+            } else {
+                valeurs.setValeur(n, Double.MAX_VALUE);
+            }
+            valeurs.setParent(n, "");
+            ligneParNoeud.put(n, null);
+        }
+
+        int taille = noeuds.size();
+
+        for (int i = 1; i <= taille - 1; i++) {
+            boolean modif = false;
+
+            for (String u : noeuds) {
+                double distU = valeurs.getValeur(u);
+                if (distU == Double.POSITIVE_INFINITY) continue;
+
+                String ligneU = ligneParNoeud.get(u);
+
+                for (Arc arc : g.suivants(u)) {
+                    String v = arc.getDest();
+                    double cout = arc.getCout();
+                    String ligneArc = arc.getLigne();
+
+                    // Appliquer pénalité si changement de ligne
+                    double penalite = (ligneU != null && !ligneU.equals(ligneArc)) ? 10.0 : 0.0;
+                    double nouveauCout = distU + cout + penalite;
+
+                    if (valeurs.getValeur(v) > nouveauCout) {
+                        valeurs.setValeur(v, nouveauCout);
+                        valeurs.setParent(v, u);
+                        ligneParNoeud.put(v, ligneArc);
+                        modif = true;
+                    }
+                }
+            }
+
+            if (!modif) break;
+        }
 
         return valeurs;
     }

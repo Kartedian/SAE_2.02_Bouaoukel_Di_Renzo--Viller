@@ -24,15 +24,15 @@ public class Main {
         System.out.println(test.toString());
 
 
-        Valeurs.ToStringChemin(test.calculerChemin("E"));
+        Valeurs.ToStringChemin(test.calculerChemin("D"));
 
 
 
 
         strategie.setAlgorithme(new Dijkstra());
-        Valeurs test_2 = strategie.trouverChemins(gra, "E");
+        Valeurs test_2 = strategie.trouverChemins(gra, "C");
         System.out.println(test_2.toString());
-        System.out.println(test_2.calculerChemin("C")+"\n");
+        System.out.println(test_2.calculerChemin("D")+"\n");
 
         GrapheListe gra_file = new GrapheListe("./src/main/resources/test.txt");
         System.out.println(gra_file.toString());

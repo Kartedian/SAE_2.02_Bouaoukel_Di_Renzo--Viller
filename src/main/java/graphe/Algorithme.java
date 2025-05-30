@@ -16,4 +16,7 @@ public interface Algorithme {
      * @throws IllegalArgumentException si le nœud de départ n'existe pas dans le graphe
      */
     Valeurs resoudre(Graphe g, String depart);
+
+
+    Valeurs resoudre2(Graphe g, String depart);
 }
