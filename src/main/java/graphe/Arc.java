@@ -42,14 +42,34 @@ public class Arc {
         return this.dest+"("+this.cout+")";
     }
 
+    /**
+     * Retourne le coût associé à cet arc.
+     *
+     * @return le coût de l’arc
+     */
+
     public double getCout() {
         return cout;
     }
 
+
+    /**
+     * Retourne le nom du nœud de destination de l’arc.
+     *
+     * @return le nom de la destination
+     */
     public String getDest(){
 
         return dest;
     }
+
+    /**
+     * Construit un arc avec une ligne spécifiée.
+     *
+     * @param dest  le nom du nœud de destination
+     * @param cout  le coût de l’arc
+     * @param ligne la ligne à laquelle appartient l’arc
+     */
 
     public Arc(String dest, double cout, String ligne) {
         if (cout > 0.0)
@@ -73,5 +93,10 @@ public class Arc {
         }
     }
 
+    /**
+     * Retourne la ligne à laquelle appartient cet arc.
+     *
+     * @return le nom de la ligne
+     */
     public String getLigne() {return this.ligne;}
 }

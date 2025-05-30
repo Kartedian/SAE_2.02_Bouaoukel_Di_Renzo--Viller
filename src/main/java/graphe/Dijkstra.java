@@ -86,17 +86,16 @@ public class Dijkstra implements Algorithme {
     }
 
     /**
-     * Version 2 de Dijkstra qui ajoute une pénalité de 10 lors d'un changement de ligne.
+     * Version 2 de Dijkstra qui ajoute une pénalité lors d'un changement de ligne.
      */
-    public Valeurs resoudre2(Graphe g, String depart){
+    public Valeurs resoudre2(Graphe g, String depart) {
         Valeurs valeurs = new Valeurs();
         List<String> Q = new ArrayList<>();
+        Map<String, String> ligneParente = new HashMap<>();
+
         if (!g.listeNoeuds().contains(depart)) {
             throw new IllegalArgumentException("Le nœud de départ n'existe pas dans le graphe.");
         }
-
-        // Pour chaque station, on garde aussi la dernière ligne utilisée pour y arriver
-        Map<String, String> ligneParente = new HashMap<>();
 
         for (String v : g.listeNoeuds()) {
             valeurs.setValeur(v, Double.POSITIVE_INFINITY);
@@ -105,22 +104,25 @@ public class Dijkstra implements Algorithme {
         }
 
         valeurs.setValeur(depart, 0.0);
-        ligneParente.put(depart, null); // Pas de ligne pour le départ
+        ligneParente.put(depart, null);
 
         while (!Q.isEmpty()) {
             String u = trouveMin(Q, valeurs);
             Q.remove(u);
 
-            List<Arc> arcs = g.suivants(u);
-            for (Arc arc : arcs) {
+            for (Arc arc : g.suivants(u)) {
                 String v = arc.getDest();
                 if (!Q.contains(v)) continue;
 
-                String ligneU = ligneParente.get(u);
-                String ligneArc = arc.getDest();
 
-                double penalite = (ligneU != null && !ligneU.equals(ligneArc)) ? 10.0 : 0.0;
-                double nouveauCout = valeurs.getValeur(u) + arc.getCout() + penalite;
+                double distU = valeurs.getValeur(u);
+                String ligneU = ligneParente.get(u);
+                String ligneArc = arc.getLigne();
+                double cout = arc.getCout();
+
+                //Pénalité de 1000 pour être sur que les changements de ligne sont évité au plus possible
+                double penalite = (ligneU != null && !ligneU.equals(ligneArc)) ? 1000.0 : 0.0;
+                double nouveauCout = distU + cout + penalite;
 
                 if (nouveauCout < valeurs.getValeur(v)) {
                     valeurs.setValeur(v, nouveauCout);
@@ -132,6 +134,7 @@ public class Dijkstra implements Algorithme {
 
         return valeurs;
     }
+
 
 
 

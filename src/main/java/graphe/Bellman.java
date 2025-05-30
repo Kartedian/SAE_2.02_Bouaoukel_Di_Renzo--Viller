@@ -73,7 +73,9 @@ public class Bellman implements Algorithme{
         return valeurs;
     }
 
-
+    /**
+     * Version 2 de Bellman qui ajoute une pénalité lors d'un changement de ligne.
+     */
     public Valeurs resoudre2(Graphe g, String depart) {
         List<String> noeuds = g.listeNoeuds();
         if (!noeuds.contains(depart)) {
@@ -109,8 +111,8 @@ public class Bellman implements Algorithme{
                     double cout = arc.getCout();
                     String ligneArc = arc.getLigne();
 
-                    // Appliquer pénalité si changement de ligne
-                    double penalite = (ligneU != null && !ligneU.equals(ligneArc)) ? 10.0 : 0.0;
+                    //Pénalité de 1000 pour être sur que les changements de ligne sont évité au plus possible
+                    double penalite = (ligneU != null && !ligneU.equals(ligneArc)) ? 1000.0 : 0.0;
                     double nouveauCout = distU + cout + penalite;
 
                     if (valeurs.getValeur(v) > nouveauCout) {

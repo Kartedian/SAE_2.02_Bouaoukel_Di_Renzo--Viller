@@ -6,7 +6,19 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * Classe utilitaire permettant de lire un fichier texte décrivant un réseau de métro
+ * et de le transformer en un Graphe. */
+
 public class LireReseau {
+
+    /**
+     * Lit un fichier texte contenant la description d’un réseau de métro et retourne
+     * un graphe représentant ce réseau.
+     *
+     * @param fichier le chemin vers le fichier à lire
+     * @return un objet GrapheListe représentant le réseau
+     */
     public static Graphe lire(String fichier) {
         GrapheListe graphe = new GrapheListe();
         Map<String, String> idVersNom = new HashMap<>(); // Associe ID station à son nom
@@ -19,6 +31,7 @@ public class LireReseau {
 
             String line;
             while((line = buff.readLine()) != null){
+                // Détection des sections
                 if(line.startsWith("%% Stations:")){
                     lireStations = true;
                     lireConnexions = false;
@@ -30,6 +43,7 @@ public class LireReseau {
                     line=buff.readLine();
                     continue;
                 }
+                // Lecture des stations
                 if(lireStations){
                     String[] tab = line.split(":");
                     if(tab.length == 5){
@@ -40,6 +54,7 @@ public class LireReseau {
                             graphe.ajouterArc(nom, nom, 0.0, "none"); // Arc factice
                         }
                     }
+                    // Lecture des connexions
                 } else if(lireConnexions){
                     String[] parties = line.split(":");
                     if(parties.length == 4){

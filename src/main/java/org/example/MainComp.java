@@ -4,8 +4,18 @@ import graphe.*;
 
 import java.util.ArrayList;
 
-public class MainComp {
 
+/**
+ * La classe MainComp permet de comparer les performances des algorithmes
+ * de plus court chemin Bellman-Ford et Dijkstra sur plusieurs graphes.
+ */
+ public class MainComp {
+
+    /**
+     * Construit des graphe exemple avec des arcs orientés et pondérés.
+     *
+     * @return un objet GrapheListe représentant le graphe
+     */
     // Graphe 1
     public static GrapheListe graphe1() {
         GrapheListe gra = new GrapheListe();
@@ -77,6 +87,12 @@ public class MainComp {
         return gra;
     }
 
+
+    /**
+     * Méthode principale. Effectue les comparaisons de performances entre Bellman-Ford
+     * et Dijkstra sur plusieurs graphes.
+     *
+     */
     public static void main(String[] args) {
         long tot=0;
         int i=0;
@@ -91,26 +107,29 @@ public class MainComp {
         Valeurs Bellman;
         Valeurs Dijkstra;
 
-        for(GrapheListe gra : graphes){
+        for (GrapheListe gra : graphes) {
             i++;
-            System.out.println("Graphe :"+i+"\n"+gra+"\nBellman:");
+            System.out.println("Graphe :" + i + "\n" + gra + "\nBellman:");
 
-            long startTime=System.currentTimeMillis();
+            long startTime = System.nanoTime();
             strategie.setAlgorithme(new Bellman());
-            Bellman = strategie.trouverChemins(gra, gra.listeNoeuds().get((int) (Math.abs(Math.random()*gra.listeNoeuds().size()))));
-            long endTime=System.currentTimeMillis();
-            System.out.println(Bellman +"\nBellman Time : "+(endTime-startTime)+"ms\n\nDijkstra:");
-            tot+=(endTime-startTime);
+            Bellman = strategie.trouverChemins(gra, gra.listeNoeuds().get((int) (Math.abs(Math.random() * gra.listeNoeuds().size()))));
+            long endTime = System.nanoTime();
+            long durationMicro = (endTime - startTime) / 1000;
+            System.out.println(Bellman + "\nBellman Time : " + durationMicro + " µs\n");
 
-            startTime=System.currentTimeMillis();
+            tot += durationMicro;
+
+            System.out.println("Dijkstra:");
+            startTime = System.nanoTime();
             strategie.setAlgorithme(new Dijkstra());
-            Dijkstra = strategie.trouverChemins(gra, gra.listeNoeuds().get((int) (Math.abs(Math.random()*gra.listeNoeuds().size()))));
-            endTime=System.currentTimeMillis();
-            System.out.println(Dijkstra+"\nDijkstra Time : "+(endTime-startTime)+"ms\n\n");
-            tot+=(endTime-startTime);
+            Dijkstra = strategie.trouverChemins(gra, gra.listeNoeuds().get((int) (Math.abs(Math.random() * gra.listeNoeuds().size()))));
+            endTime = System.nanoTime();
+            durationMicro = (endTime - startTime) / 1000;
+            System.out.println(Dijkstra + "\nDijkstra Time : " + durationMicro + " µs\n");
+
+            tot += durationMicro;
+
             System.out.println("---------------------------------------");
         }
-        tot=tot/(i*2);
-        System.out.println("Average Time : "+tot+"ms");
-    }
-}
+}}

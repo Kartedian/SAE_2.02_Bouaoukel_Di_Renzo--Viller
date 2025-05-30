@@ -121,6 +121,18 @@ public class GrapheListe implements Graphe{
         return res;
     }
 
+
+    /**
+     * Ajoute un arc orienté partant d'un nœud de départ vers un nœud de destination avec un coût donné
+     * et associé à une ligne de métro.
+     * Si le nœud de départ n'existe pas encore dans le graphe, il est automatiquement ajouté avec une nouvelle liste d'arcs.
+     * Si les paramètres sont invalides (valeurs nulles, chaînes vides, ou coût non strictement positif), l'arc n'est pas ajouté.
+     *
+     * @param depart      le nom du nœud de départ
+     * @param destination le nom du nœud de destination
+     * @param cout        le coût de l'arc
+     * @param ligneMetro  la ligne de métro à laquelle l'arc appartient
+     */
     public void ajouterArc(String depart, String destination, double cout, String ligneMetro) {
         // Vérifie les paramètres
         if (destination == null && destination.isEmpty() || depart == null && depart.isEmpty() || cout <= 0.0 || ligneMetro == null && ligneMetro.isEmpty()) {
